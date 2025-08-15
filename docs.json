@@ -11,7 +11,9 @@
     "light":"/favicon.svg",
     "dark":"/favicon-dark.svg"
   },
-  "codeblocks":"dark",
+  "styling":{
+    "codeblocks":"dark"
+  },
   "navigation": {
     "tabs": [
       {
@@ -19,6 +21,8 @@
         "groups": [
           {
             "group": "Getting started",
+            "icon": "rocket",
+            "tag": "NEW",
             "pages": [
               "index",
               "quickstart",
