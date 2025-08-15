@@ -1,13 +1,16 @@
 {
   "$schema": "https://mintlify.com/docs.json",
-  "theme": "maple",
+  "theme": "mint",
   "name": "Bawabah Docs",
   "colors": {
     "primary": "#dc8c50",
     "light": "#dca05a",
     "dark": "#d28546"
   },
-  "favicon": "/favicon.svg",
+  "favicon": {
+    "light":"/favicon.svg",
+    "dark":"/favicon-dark.svg"
+  },
   "navigation": {
     "tabs": [
       {
