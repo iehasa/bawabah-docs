@@ -33,27 +33,31 @@
           },
           {
             "group": "Development",
-            "icon": "terminal",
+            "icon": "code",
             "pages": [
-              "development/hosted",
-              "development/form"
+              "development/en/hosted",
+              "development/en/form",
+              "development/en/backend"
             ]
           },
           {
             "group": "Examples",
+            "icon": "flask",
             "pages": [
-              "essentials/markdown",
-              "essentials/code",
-              "essentials/images",
-              "essentials/reusable-snippets"
+              "examples/en/express",
+              "examples/en/next",
+              "examples/en/react",
+              "examples/en/vue",
+              "examples/en/astro",
+              "examples/en/cloudflare-workers"
             ]
           },
           {
             "group": "API Reference",
+            "icon": "plug",              
             "pages": [
-              "ai-tools/cursor",
-              "ai-tools/claude-code",
-              "ai-tools/windsurf"
+              "api-reference/capture-session",
+              "api-reference/en/errors"
             ]
           }
         ]
@@ -86,27 +90,31 @@
             },
             {
               "group": "البرمجة",
-              "icon": "terminal",
+              "icon": "code",
               "pages": [
-                "essentials/settings",
-                "essentials/navigation"
+                "development/en/hosted",
+                "development/en/form",
+                "development/en/backend"
               ]
             },
             {
               "group": "أمثلة",
+              "icon": "flask",              
               "pages": [
-                "essentials/markdown",
-                "essentials/code",
-                "essentials/images",
-                "essentials/reusable-snippets"
+              "examples/en/express",
+              "examples/en/next",
+              "examples/en/react",
+              "examples/en/vue",
+              "examples/en/astro",
+              "examples/en/cloudflare-workers"
               ]
             },
             {
               "group": "مراجع الواجهة البرمجية",
+              "icon": "plug",              
               "pages": [
-                "ai-tools/cursor",
-                "ai-tools/claude-code",
-                "ai-tools/windsurf"
+              "api-reference/capture-session",
+              "api-reference/en/errors"
               ]
             }
           ]
