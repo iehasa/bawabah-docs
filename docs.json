@@ -56,7 +56,7 @@
             "group": "API Reference",
             "icon": "plug",              
             "pages": [
-              "api-reference/capture-session",
+              "POST api-reference/capture-session",
               "api-reference/en/errors"
             ]
           }
