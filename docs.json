@@ -35,8 +35,8 @@
             "group": "Development",
             "icon": "terminal",
             "pages": [
-              "essentials/settings",
-              "essentials/navigation"
+              "development/hosted",
+              "development/form"
             ]
           },
           {
