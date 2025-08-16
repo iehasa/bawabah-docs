@@ -89,7 +89,6 @@
                   }
                 }
               },
-              "required": ["sessionId", "appId", "appSecret"],
               "example": {
                 "sessionId": "user-session-id",
                 "appId": "your-app-id",
