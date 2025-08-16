@@ -54,9 +54,12 @@
           },
           {
             "group": "API Reference",
+            "openapi": {
+              "source": "api-reference/open-api.json",
+            }
             "icon": "plug",              
             "pages": [
-              "POST api-reference/capture-session",
+              "api-reference/capture-session",
               "api-reference/en/errors"
             ]
           }

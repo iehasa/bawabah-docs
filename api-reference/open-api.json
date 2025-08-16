@@ -1,0 +1,102 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "APP",
+    "version": "1.0.0",
+    "description": "# CREATE NEW SESSION\n\n1. Create a Temp Session with the user's IP and save it to the cache.\n    \n2. Create a new user and user login method if the Email is new.\n    \n3. Turn the temp session into a capture session.\n    \n4. Send JWT token as cookies.\n    \n5. Respond with RedirectUrl.\n    \n6. Front-end Bawabah website redirects the user to the dev website.\n    \n7. **Dev Backend** sends a POST request to the **Backend** with sessionId + appId + appSecret.\n    \n8. Bawabah Backend saves the session from cache to the Database."
+  },
+  "servers": [
+    {
+      "url": "https://api.bawabah.app/v1"
+    }
+  ],
+  "paths": {
+    "/app/session": {
+      "parameters": [],
+      "post": {
+        "summary": "get session",
+        "parameters": [],
+        "responses": {
+          "default": {
+            "headers": {
+              "Content-Type": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "application/json"
+              }
+            },
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "openId": {
+                      "type": "string"
+                    },
+                    "displayname": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "avatar": {
+                      "type": "string",
+                      "format": "uri",
+                      "nullable": true
+                    },
+                    "method": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": ["email", "whatsapp"]
+                        },
+                        "value": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                },
+                "example": {
+                  "openId": "Q7SKqba1J0uOwxD0i8Pay",
+                  "displayname": null,
+                  "avatar": "https://www.gravatar.com/avatar/eea714caf9753c6c7fdc0c4ef4a955f7?s=256&d=identicon",
+                  "method": {
+                    "type": "email",
+                    "value": "useremail@gmail.com"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "sessionId": {
+                    "type": "string"
+                  },
+                  "appId": {
+                    "type": "string"
+                  },
+                  "appSecret": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "sessionId": "user-session-id",
+                "appId": "your-app-id",
+                "appSecret": "your-app-secret"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
