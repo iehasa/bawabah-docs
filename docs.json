@@ -28,19 +28,18 @@
             "tag": "NEW",
             "pages": [
               "getting-started/en/index",
-              "getting-started/en/quickstart",
-              "getting-started/en/development"
+              "getting-started/en/quickstart"
             ]
           },
           {
-            "group": "Customization",
+            "group": "Development",
             "pages": [
               "essentials/settings",
               "essentials/navigation"
             ]
           },
           {
-            "group": "Writing content",
+            "group": "Examples",
             "pages": [
               "essentials/markdown",
               "essentials/code",
@@ -49,31 +48,11 @@
             ]
           },
           {
-            "group": "AI tools",
+            "group": "API Reference",
             "pages": [
               "ai-tools/cursor",
               "ai-tools/claude-code",
               "ai-tools/windsurf"
-            ]
-          }
-        ]
-      },
-      {
-        "tab": "API reference",
-        "groups": [
-          {
-            "group": "API documentation",
-            "pages": [
-              "api-reference/introduction"
-            ]
-          },
-          {
-            "group": "Endpoint examples",
-            "pages": [
-              "api-reference/endpoint/get",
-              "api-reference/endpoint/create",
-              "api-reference/endpoint/delete",
-              "api-reference/endpoint/webhook"
             ]
           }
         ]
@@ -82,7 +61,7 @@
     "global": {
       "anchors": [
         {
-          "anchor": "Discord Server",
+          "anchor": "Discord Developers Center",
           "href": "https://discord.gg/9YpqwdNpxy",
           "icon": "discord"
         }
@@ -100,20 +79,19 @@
               "icon": "rocket",
               "tag": "جديد",
               "pages": [
-                "getting-started/en/index",
-                "getting-started/en/quickstart",
-                "getting-started/en/development"
+                "getting-started/ar/index",
+                "getting-started/ar/quickstart"
               ]
             },
             {
-              "group": "Customization",
+              "group": "البرمجة",
               "pages": [
                 "essentials/settings",
                 "essentials/navigation"
               ]
             },
             {
-              "group": "Writing content",
+              "group": "أمثلة",
               "pages": [
                 "essentials/markdown",
                 "essentials/code",
@@ -122,31 +100,11 @@
               ]
             },
             {
-              "group": "AI tools",
+              "group": "مراجع الواجهة البرمجية",
               "pages": [
                 "ai-tools/cursor",
                 "ai-tools/claude-code",
                 "ai-tools/windsurf"
-              ]
-            }
-          ]
-        },
-        {
-          "tab": "API reference",
-          "groups": [
-            {
-              "group": "API documentation",
-              "pages": [
-                "api-reference/introduction"
-              ]
-            },
-            {
-              "group": "Endpoint examples",
-              "pages": [
-                "api-reference/endpoint/get",
-                "api-reference/endpoint/create",
-                "api-reference/endpoint/delete",
-                "api-reference/endpoint/webhook"
               ]
             }
           ]
@@ -155,7 +113,7 @@
       "global": {
         "anchors": [
           {
-            "anchor": "Discord Server",
+            "anchor": "مجتمع مبرمجي بوابة",
             "href": "https://discord.gg/9YpqwdNpxy",
             "icon": "discord"
           }
