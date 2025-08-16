@@ -3,9 +3,9 @@
   "theme": "mint",
   "name": "Bawabah Docs",
   "colors": {
-    "primary": "#dc8c50",
-    "light": "#dca05a",
-    "dark": "#d28546"
+    "primary": "#000000",
+    "light": "#f7f7f7",
+    "dark": "#18181f"
   },
   "favicon": {
     "light":"/favicon.svg",
@@ -15,6 +15,9 @@
     "codeblocks":"dark"
   },
   "navigation": {
+    "languages": [
+      {
+        "language": "en",
     "tabs": [
       {
         "tab": "Guides",
@@ -24,9 +27,9 @@
             "icon": "rocket",
             "tag": "NEW",
             "pages": [
-              "index",
-              "quickstart",
-              "development"
+              "getting-started/en/index",
+              "getting-started/en/quickstart",
+              "getting-started/en/development"
             ]
           },
           {
@@ -85,6 +88,81 @@
         }
       ]
     }
+      },
+      {
+      "language": "ar",
+      "tabs": [
+        {
+          "tab": "المستندات",
+          "groups": [
+            {
+              "group": "البدء",
+              "icon": "rocket",
+              "tag": "جديد",
+              "pages": [
+                "index",
+                "quickstart",
+                "development"
+              ]
+            },
+            {
+              "group": "Customization",
+              "pages": [
+                "essentials/settings",
+                "essentials/navigation"
+              ]
+            },
+            {
+              "group": "Writing content",
+              "pages": [
+                "essentials/markdown",
+                "essentials/code",
+                "essentials/images",
+                "essentials/reusable-snippets"
+              ]
+            },
+            {
+              "group": "AI tools",
+              "pages": [
+                "ai-tools/cursor",
+                "ai-tools/claude-code",
+                "ai-tools/windsurf"
+              ]
+            }
+          ]
+        },
+        {
+          "tab": "API reference",
+          "groups": [
+            {
+              "group": "API documentation",
+              "pages": [
+                "api-reference/introduction"
+              ]
+            },
+            {
+              "group": "Endpoint examples",
+              "pages": [
+                "api-reference/endpoint/get",
+                "api-reference/endpoint/create",
+                "api-reference/endpoint/delete",
+                "api-reference/endpoint/webhook"
+              ]
+            }
+          ]
+        }
+      ],
+      "global": {
+        "anchors": [
+          {
+            "anchor": "Discord Server",
+            "href": "https://discord.gg/9YpqwdNpxy",
+            "icon": "discord"
+          }
+        ]
+      }
+      }
+    ]
   },
   "logo": {
     "light": "/logo/light.svg",
