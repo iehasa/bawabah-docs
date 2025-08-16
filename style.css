@@ -6,3 +6,7 @@
 html {
   scroll-behavior: smooth;
 }
+
+.mdx-content img{
+    border: 2px solid rgb(var(--primary-dark));
+}
