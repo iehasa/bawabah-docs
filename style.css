@@ -2,3 +2,7 @@
   --background-light: 247 247 247;
   --background-dark: 24 24 31;
 }
+
+html {
+  scroll-behavior: smooth;
+}

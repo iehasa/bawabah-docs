@@ -15,7 +15,7 @@ description: "Start Building Quickly, with minimal setup needed."
   </Step>
 </Steps>
 
-## <Icon icon="gear" iconType="regular" /> Create Your First App
+## <Icon icon="gear" iconType="sharp-duotone-solid" /> Create Your First App
 
 1. Login to your Bawabah Developer Account: https://bawabah.app/dev/login.
 2. Click "New App" button to create a new App.
@@ -39,7 +39,7 @@ description: "Start Building Quickly, with minimal setup needed."
   When you create a new app, your app will be in Sandbox Mode, meaning only the developer or test users, if any, can log in with their email. To make your app accessible to the public, remember to request App Review after completing your app integration.
 </Warning>
 
-## Front-end
+## <Icon icon="window" iconType="sharp-duotone-solid" /> Front-end
 
 There are two ways to use Bawabah in your project:
 
@@ -52,21 +52,9 @@ There are two ways to use Bawabah in your project:
   </Card>
 </CardGroup>
 
-And here is a comparison between both integration methods:
-
-| Comparison       | **Hosted Login** | **Form Login** |
-| ---------------- | :--------------: | :------------: |
-| Login Page       | Ready-to-use     | make your own  |
-| Login Happens in | Bawabah website  | your website   |
-| Design           | CSS only         | Unlimited      |
-| Page Contents    | Login Only       | Unlimited      |
-| App Review Time  | Quicker          | Normal         |
-| Setup            | Easy             | Professional   |
-| Price            | Free             | -              |
-
 ### Setup Hosted Login
 
-Use the URL below to login users to your website:
+Use the URL below to access your login hosted page:
 
 ```
 https://bawabah.app/login?appId={your-app-id}&callbackUrl={your-callback-url}&fullscreen=true
@@ -78,6 +66,220 @@ When users click the login button on your website, they are redirected to the ho
 
 **For Example:**\
 If your appId is `4y83w4f` And your callback URL is `https://mywebsite.com/login/callback` Then the hosted login URL will be `https://bawabah.app/login?appId=4y83w4f&callbackUrl=https://mywebsite.com/login/callback&fullscreen=true`
+
+### Setup Form Login
+
+If you followed the last step ([**Setup Hosted Login**](#setup-hosted-login)) no need to set up a login form. Alternatively, if you wish to host the login form on your own website, you can follow the guide on **Form Login**.
+
+## <Icon icon="server" iconType="sharp-duotone-solid" /> Back-end
+
+<Info>
+  In case you use a language other than Node.js or you prefer to integrate with Bawabah API manually, please refer to our **API Reference**.
+</Info>
+
+First, we have to install Bawabah Library from NPM (https://www.npmjs.com/package/bawabah) using the command:
+
+```
+npm i bawabah
+```
+
+After installing the npm Package, we can start using it immediately:
+
+<CodeGroup>
+
+```typescript index.ts
+// Import Bawabah Library
+import Bawabah from 'bawabah';
+
+// Initialize Bawabah with your credentials
+const bw = new Bawabah();
+bw.init({
+    appId: "your-app-id",
+    appSecret: "your-app-secret"
+});
+```
+
+
+```javascript index.js
+// Import Bawabah Library
+const Bawabah = require('bawabah');
+
+// Initialize Bawabah with your credentials
+const bw = new Bawabah();
+bw.init({
+    appId: "your-app-id",
+    appSecret: "your-app-secret"
+});
+```
+
+</CodeGroup>
+
+Now we will create the callback route to capture the user session. In this example, we will use Express.js to create the route, then capture the user session with the `capture()` function:
+
+<CodeGroup>
+
+```typescript index.ts
+// Import Express and Bawabah Library
+import express from 'express';
+import Bawabah from 'bawabah';
+
+// Initialize Bawabah with your credentials
+const bw = new Bawabah();
+bw.init({
+    appId: "your-app-id",
+    appSecret: "your-app-secret"
+});
+
+// Create Express app
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+// Callback route for Bawabah redirect
+app.get('/login/callback', async (req, res) => {
+    const sessionId = req.query.sessionId as string; // Get Session Id from Query /login/callback?sessionId=abc123
+
+	// Capture user session from Bawabah
+    const result = await bw.capture(sessionId);
+    console.log(result); // Log User Data -- for Debugging --
+
+    res.json({ loggedIn: true });
+});
+
+// Start the Express server
+app.listen(PORT, () => {
+    console.log(`Server running on http://localhost:${PORT}`);
+});
+```
+
+
+```javascript index.js
+// Import Express and Bawabah Library
+const express = require('express');
+const Bawabah = require('bawabah');
+
+// Initialize Bawabah with your credentials
+const bw = new Bawabah();
+bw.init({
+    appId: "your-app-id",
+    appSecret: "your-app-secret"
+});
+
+// Create Express app
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+// Callback route for Bawabah redirect
+app.get('/login/callback', async (req, res) => {
+    const sessionId = req.query.sessionId; // Get Session Id from Query /login/callback?sessionId=abc123
+
+    // Capture user session from Bawabah
+    const result = await bw.capture(sessionId);
+    console.log(result); // Log User Data -- for Debugging --
+
+    res.json({ loggedIn: true });
+});
+
+// Start the Express server
+app.listen(PORT, () => {
+    console.log(`Server running on http://localhost:${PORT}`);
+});
+```
+
+</CodeGroup>
+
+Finally, after testing the implementation, we can add our Login/Signup logic and wrap the code in a try/catch block to catch any errors:
+
+<CodeGroup>
+
+```typescript index.ts
+// Import Express and Bawabah Library
+import express from 'express';
+import Bawabah from 'bawabah';
+
+// Initialize Bawabah with your credentials
+const bw = new Bawabah();
+bw.init({
+    appId: "your-app-id",
+    appSecret: "your-app-secret"
+});
+
+// Create Express app
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+// Callback route for Bawabah redirect
+app.get('/login/callback', async (req, res) => {
+    const sessionId = req.query.sessionId as string; // Get Session Id from Query /login/callback?sessionId=abc123
+    if (!sessionId) {
+        // If sessionId is missing, return a 400 error
+        return res.status(400).send('Missing sessionId in query');
+    }
+
+    try {
+        // Capture user session from Bawabah
+        const result = await bw.capture(sessionId);
+
+        // --- Perform Your User Login/Signup Logic here ---
+
+        res.status(200).json({ loggedIn: true });
+    } catch (err) {
+        // If Bawabah API Respond with an Error, return a 500 error to the user with details
+        res.status(500).json({ error: 'Failed to capture session', details: err });
+    }
+
+});
+
+// Start the Express server
+app.listen(PORT, () => {
+    console.log(`Server running on http://localhost:${PORT}`);
+});
+```
+
+
+```javascript index.js
+// Import Express and Bawabah Library
+const express = require('express');
+const Bawabah = require('bawabah');
+
+// Initialize Bawabah with your credentials
+const bw = new Bawabah();
+bw.init({
+    appId: "your-app-id",
+    appSecret: "your-app-secret"
+});
+
+// Create Express app
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+// Callback route for Bawabah redirect
+app.get('/login/callback', async (req, res) => {
+    const sessionId = req.query.sessionId; // Get Session Id from Query /login/callback?sessionId=abc123
+    if (!sessionId) {
+        // If sessionId is missing, return a 400 error
+        return res.status(400).send('Missing sessionId in query');
+    }
+
+    try {
+        // Capture user session from Bawabah
+        const result = await bw.capture(sessionId);
+
+        // --- Perform Your User Login/Signup Logic here ---
+
+        res.status(200).json({ loggedIn: true });
+    } catch (err) {
+        // If Bawabah API responds with an error, return a 500 error to the user with details
+        res.status(500).json({ error: 'Failed to capture session', details: err.message || err });
+    }
+});
+
+// Start the Express server
+app.listen(PORT, () => {
+    console.log(`Server running on http://localhost:${PORT}`);
+});
+```
+
+</CodeGroup>
 
 ## Next steps
 
