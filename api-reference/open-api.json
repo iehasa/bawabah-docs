@@ -78,13 +78,16 @@
                 "type": "object",
                 "properties": {
                   "sessionId": {
-                    "type": "string"
+                    "type": "string",
+                    "required": true
                   },
                   "appId": {
-                    "type": "string"
+                    "type": "string",
+                    "required": true
                   },
                   "appSecret": {
-                    "type": "string"
+                    "type": "string",
+                    "required": true
                   }
                 }
               },
