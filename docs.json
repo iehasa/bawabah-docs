@@ -60,7 +60,6 @@
             "icon": "plug",              
             "pages": [
               "POST /app/session",
-              "api-reference/capture-session",
               "api-reference/en/errors"
             ]
           }

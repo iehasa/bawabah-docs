@@ -76,18 +76,16 @@
             "application/json": {
               "schema": {
                 "type": "object",
+                "required": ["sessionId", "appId", "appSecret"],
                 "properties": {
                   "sessionId": {
-                    "type": "string",
-                    "required": true
+                    "type": "string"
                   },
                   "appId": {
-                    "type": "string",
-                    "required": true
+                    "type": "string"
                   },
                   "appSecret": {
-                    "type": "string",
-                    "required": true
+                    "type": "string"
                   }
                 }
               },
