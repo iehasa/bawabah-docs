@@ -21,19 +21,19 @@ description: "Start Building Quickly, with minimal setup needed."
 2. Click "New App" button to create a new App.
 
    <img
-     src="/images/quickstart/create-app-en.png"
+     src="/images/quickstart/create-app-ar.png"
      alt="Create App En Pn"
      title="Create App En Pn"
      style={{ width:"100%" }}
    />
 3. Set up Your App by adding **App Logo** and **App Name**, and Add At least 1 **callback URL**.
 
-   ![Create App2 En Pn](/images/quickstart/create-app2-en.png)
+   ![Create App2 En Pn](/images/quickstart/create-app2-ar.png)
 
-   ![Create App3 En Pn](/images/quickstart/create-app3-en.png)
+   ![Create App3 En Pn](/images/quickstart/create-app3-ar.png)
 4. Regenerate your AppSecret, then copy appId and appSecret For Later Use.
 
-   ![Create App4 En Pn](/images/quickstart/create-app4-en.png)
+   ![Create App4 En Pn](/images/quickstart/create-app4-ar.png)
 
 <Warning>
   When you create a new app, your app will be in Sandbox Mode, meaning only the developer or test users, if any, can log in with their email. To make your app accessible to the public, remember to request App Review after completing your app integration.
@@ -117,6 +117,12 @@ bw.init({
 > Replace `{your-app-id}` with your appId and `{your-app-secret}`with your appSecret From [Create Your First App](#create-your-first-app) Step.
 
 Now we will create the callback route to capture the user session. In this example, we will use Express.js to create the route, then capture the user session with the `capture()` function:
+
+But before that, we need to install Express.js using this command:
+
+```
+npm i express
+```
 
 <CodeGroup>
 
