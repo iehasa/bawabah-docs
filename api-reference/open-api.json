@@ -72,11 +72,11 @@
           }
         },
         "requestBody": {
+          "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": ["sessionId", "appId", "appSecret"],
                 "properties": {
                   "sessionId": {
                     "type": "string"
@@ -89,6 +89,7 @@
                   }
                 }
               },
+              "required": ["sessionId", "appId", "appSecret"],
               "example": {
                 "sessionId": "user-session-id",
                 "appId": "your-app-id",
