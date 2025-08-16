@@ -33,6 +33,7 @@
           },
           {
             "group": "Development",
+            "icon": "terminal",
             "pages": [
               "essentials/settings",
               "essentials/navigation"
@@ -85,6 +86,7 @@
             },
             {
               "group": "البرمجة",
+              "icon": "terminal",
               "pages": [
                 "essentials/settings",
                 "essentials/navigation"
