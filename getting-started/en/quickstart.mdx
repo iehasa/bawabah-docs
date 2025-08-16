@@ -26,7 +26,7 @@ description: "Start Building Quickly, with minimal setup needed."
      title="Create App En Pn"
      style={{ width:"100%" }}
    />
-3. Set up Your App by adding **App Logo** and **App Name**, and Add At least 1 **<Tooltip tip="The callback URL is the page link to redirect the user to after login">callback URL</Tooltip>**.
+3. Set up Your App by adding **App Logo** and **App Name**, and Add At least 1 **callback URL**.
 
    ![Create App2 En Pn](/images/quickstart/create-app2-en.png)
 
@@ -54,7 +54,7 @@ There are two ways to use Bawabah in your project:
 
 And here is a comparison between both integration methods:
 
-|                  | **Hosted Login** | **Form Login** |
+| Comparison       | **Hosted Login** | **Form Login** |
 | ---------------- | :--------------: | :------------: |
 | Login Page       | Ready-to-use     | make your own  |
 | Login Happens in | Bawabah website  | your website   |
@@ -76,8 +76,7 @@ https://bawabah.app/login?appId={your-app-id}&callbackUrl={your-callback-url}&fu
 
 When users click the login button on your website, they are redirected to the hosted login page URL. After completing the login process, they will be redirected back to your website via the callback URL, which includes a `sessionId` query parameter for the user session to capture.
 
-**For Example:**
-
+**For Example:**\
 If your appId is `4y83w4f` And your callback URL is `https://mywebsite.com/login/callback` Then the hosted login URL will be `https://bawabah.app/login?appId=4y83w4f&callbackUrl=https://mywebsite.com/login/callback&fullscreen=true`
 
 ## Next steps
