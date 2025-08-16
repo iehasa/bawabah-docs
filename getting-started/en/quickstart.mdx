@@ -31,7 +31,7 @@ description: "Start Building Quickly, with minimal setup needed."
    ![Create App2 En Pn](/images/quickstart/create-app2-en.png)
 
    ![Create App3 En Pn](/images/quickstart/create-app3-en.png)
-4. Regenerate AppSecret, then copy appId and appSecret For Later Use.
+4. Regenerate your AppSecret, then copy appId and appSecret For Later Use.
 
    ![Create App4 En Pn](/images/quickstart/create-app4-en.png)
 
@@ -74,7 +74,7 @@ If you followed the last step ([**Setup Hosted Login**](#setup-hosted-login)) no
 ## <Icon icon="server" iconType="sharp-duotone-solid" /> Back-end
 
 <Info>
-  In case you use a language other than Node.js or you prefer to integrate with Bawabah API manually, please refer to our **API Reference**.
+  In case you use a language other than Node.js or you prefer to integrate with Bawabah API manually, please refer to our [API Reference.](/api-reference/en)
 </Info>
 
 First, we have to install Bawabah Library from NPM (https://www.npmjs.com/package/bawabah) using the command:
@@ -113,6 +113,8 @@ bw.init({
 ```
 
 </CodeGroup>
+
+> Replace `{your-app-id}` with your appId and `{your-app-secret}`with your appSecret From [Create Your First App](#create-your-first-app) Step.
 
 Now we will create the callback route to capture the user session. In this example, we will use Express.js to create the route, then capture the user session with the `capture()` function:
 
@@ -281,25 +283,25 @@ app.listen(PORT, () => {
 
 </CodeGroup>
 
-## Next steps
+<Note>
+  **Need help?**  Join our [<u>community</u>](https://discord.gg/9YpqwdNpxy).
+</Note>
 
-Now that you have your docs running, explore these key features:
+## Discover more
+
+Continue discovering Bawabah:
 
 <CardGroup cols={2}>
-  <Card title="Write Content" icon="pen-to-square" href="/essentials/markdown">
-    Learn MDX syntax and start writing your documentation.
+  <Card title="Login Page" icon="page" href="/development/en/hosted">
+    A login page hosted on Bawabah website redirects user to your website after login.
   </Card>
-  <Card title="Customize style" icon="palette" href="/essentials/settings">
+  <Card title="Form Login" icon="envelope" href="/development/en/form">
     Make your docs match your brand perfectly.
   </Card>
-  <Card title="Add code examples" icon="square-code" href="/essentials/code">
-    Include syntax-highlighted code blocks.
+  <Card title="Back-end" icon="server" href="/development/en/backend">
+    Connect to Bawabah API.
   </Card>
-  <Card title="API documentation" icon="code" href="/api-reference/introduction">
-    Auto-generate API docs from OpenAPI specs.
+  <Card title="Examples" icon="flask" href="/examples/en">
+    Code implementation Examples.
   </Card>
 </CardGroup>
-
-<Note>
-  **Need help?** See our [full documentation](https://mintlify.com/docs) or join our [community](https://mintlify.com/community).
-</Note>
