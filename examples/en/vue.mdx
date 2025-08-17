@@ -1,7 +1,7 @@
 ---
-title: "Next.js"
-description: "Next.js Example."
-icon: "react"
+title: "Vue"
+description: "Vue Example."
+icon: "vuejs"
 ---
 
 import DevNote from '/snippets/dev-server-note-en.mdx';
@@ -68,40 +68,78 @@ export async function GET(req: NextRequest) {
 
 ## Create Login Page
 
-```typescript
-// File: app/login/page.tsx
-"use client";
+Create the Login Page Component at `src/views/Login.vue`:
 
-import { useEffect } from "react";
+```html
+<template>
+  <main class="login-page">
+    <h1>Welcome to my Website</h1>
+    <div id="login-form"></div>
+  </main>
+</template>
 
-export default function LoginPage() {
-  useEffect(() => {
-    // Dynamically load the Bawabah script
-    const script = document.createElement("script");
-    script.src = "https://bawabah.app/app/login-form.js";
-    script.async = true;
-    script.onload = () => {
-      // @ts-ignore - injected by the script
-      if (typeof startBawabah === "function") {
+<script setup>
+import { onMounted } from "vue";
+
+onMounted(() => {
+  // Dynamically load Bawabah script
+  const script = document.createElement("script");
+  script.src = "https://bawabah.app/app/login-form.js";
+  script.async = true;
+  script.onload = () => {
+    if (typeof startBawabah === "function") {
         startBawabah({
           element: "login-form",
           appId: "your-app-id", // 🔑 replace with your real App ID
           callbackUrl: "http://localhost:3000/login/callback" // 🔑 replace with your callback
         });
-      }
-    };
-    document.body.appendChild(script);
-  }, []);
+    }
+  };
+  document.body.appendChild(script);
+});
+</script>
 
-  return (
-    <main className="flex min-h-screen flex-col items-center justify-center">
-      <h1 className="text-2xl font-bold text-center w-full">
-        Welcome to my Website
-      </h1>
-      <div id="login-form" className="mt-6"></div>
-    </main>
-  );
+<style scoped>
+.login-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100svh;
 }
+h1 {
+  width: 100%;
+  text-align: center;
+}
+</style>
 ```
 
 <DevNote />
+
+Create the Login Page Route in `src/router/index.js`:
+
+```typescript
+import { createRouter, createWebHistory } from "vue-router";
+import Login from "../views/Login.vue";
+
+const routes = [
+  { path: "/login", name: "Login", component: Login },
+];
+
+const router = createRouter({
+  history: createWebHistory(),
+  routes,
+});
+
+export default router;
+```
+
+Mount the router in main.js file at `src/main.js`:
+
+```typescript
+import { createApp } from "vue";
+import App from "./App.vue";
+import router from "./router";
+
+createApp(App).use(router).mount("#app");
+```
