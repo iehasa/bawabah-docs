@@ -42,7 +42,7 @@ export const GET: APIRoute = async ({ url }) => {
     // --- Perform your login/signup logic here ---
 
     return new Response(
-      JSON.stringify({ loggedIn: true, session: result }),
+      JSON.stringify({ loggedIn: true }),
       { status: 200, headers: { "Content-Type": "application/json" } }
     );
   } catch (err: any) {

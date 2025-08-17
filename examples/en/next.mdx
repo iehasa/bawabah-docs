@@ -51,7 +51,7 @@ export async function GET(req: NextRequest) {
 
     // --- Perform Your User Login/Signup Logic here ---
 
-    return Response.json({ loggedIn: true, session: result }, { status: 200 });
+    return Response.json({ loggedIn: true }, { status: 200 });
   } catch (err) {
     return Response.json(
       { error: "Failed to capture session", details: String(err) },

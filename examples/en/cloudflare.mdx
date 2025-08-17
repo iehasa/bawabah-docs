@@ -14,51 +14,46 @@ import NpmBawabah from '/snippets/npm-en.mdx';
 
 ### **Create Callback Route**
 
-Now we will create the callback route to capture the user session. In this example, we will use Next.js to create the route, then capture the user session with the `capture()` function:
-
-But before that, we need to install the necessary packages using this command:
-
-```
-npm i next react react-dom
-```
+Create a Cloudflare worker to capture the user session on the callback route.
 
 <CodeGroup>
 
-```typescript app/login/callback/route.ts
-// File: app/login/callback/route.ts
-import { NextRequest } from 'next/server';
-import Bawabah from 'bawabah';
+```typescript src/index.ts
+import Bawabah from "bawabah";
 
-// Initialize Bawabah with your credentials
 const bw = new Bawabah();
 bw.init({
   appId: "your-app-id",
-  appSecret: "your-app-secret"
+  appSecret: "your-app-secret",
 });
 
-// Callback route for Bawabah redirect
-export async function GET(req: NextRequest) {
-  const { searchParams } = new URL(req.url);
-  const sessionId = searchParams.get("sessionId"); // /login/callback?sessionId=abc123
+export default {
+  async fetch(request: Request): Promise<Response> {
+    const url = new URL(request.url);
 
-  if (!sessionId) {
-    return new Response("Missing sessionId in query", { status: 400 });
-  }
+    if (url.pathname === "/login/callback") {
+      const sessionId = url.searchParams.get("sessionId");
+      if (!sessionId) {
+        return new Response("Missing sessionId", { status: 400 });
+      }
 
-  try {
-    // Capture user session from Bawabah
-    const result = await bw.capture(sessionId);
+      try {
+        const result = await bw.capture(sessionId);
 
-    // --- Perform Your User Login/Signup Logic here ---
+        // --- Perform your login/signup logic here ---
 
-    return Response.json({ loggedIn: true, session: result }, { status: 200 });
-  } catch (err) {
-    return Response.json(
-      { error: "Failed to capture session", details: String(err) },
-      { status: 500 }
-    );
-  }
-}
+        return Response.json({ loggedIn: true });
+      } catch (err: any) {
+        return Response.json(
+          { error: "Failed to capture session", details: String(err) },
+          { status: 500 }
+        );
+      }
+    }
+
+    return new Response("Not Found", { status: 404 });
+  },
+};
 ```
 
 </CodeGroup>
@@ -67,42 +62,44 @@ export async function GET(req: NextRequest) {
 
 ## Create Login Page
 
+You can create the login page with any framework or with just plain HTML, like this example:
+
 <CodeGroup>
 
-```tsx app/login/page.tsx
-// File: app/login/page.tsx
-"use client";
+```tsx login.html
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>My Project</title>
+  <style>
+    body{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100svh;
+    }
 
-import { useEffect } from "react";
+    h1{
+      width: 100%;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  	<h1>Welcome to my Website</h1>
+	<div id="login-form"></div>
 
-export default function LoginPage() {
-  useEffect(() => {
-    // Dynamically load the Bawabah script
-    const script = document.createElement("script");
-    script.src = "https://bawabah.app/app/login-form.js";
-    script.async = true;
-    script.onload = () => {
-      // @ts-ignore - injected by the script
-      if (typeof startBawabah === "function") {
-        startBawabah({
-          element: "login-form",
-          appId: "your-app-id", // 🔑 replace with your real App ID
-          callbackUrl: "http://localhost:3000/login/callback" // 🔑 replace with your callback
-        });
-      }
-    };
-    document.body.appendChild(script);
-  }, []);
-
-  return (
-    <main className="flex min-h-screen flex-col items-center justify-center">
-      <h1 className="text-2xl font-bold text-center w-full">
-        Welcome to my Website
-      </h1>
-      <div id="login-form" className="mt-6"></div>
-    </main>
-  );
-}
+  <script src="https://bawabah.app/app/login-form.js"></script>
+  <script>
+    startBawabah({
+      element:"login-form",
+      appId: "{your-app-id}", // 🔑 replace with real appId
+      callbackUrl: "http://localhost:8787/login/callback"
+    })
+  </script>
+</body>
+</html>
 ```
 
 </CodeGroup>
