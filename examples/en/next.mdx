@@ -3,8 +3,12 @@ title: "Next.js"
 description: "Next.js Example."
 icon: "react"
 ---
-import DevNote from '/snippets/dev-server-note-en.mdx';
 
+import DevNote from '/snippets/dev-server-note-en.mdx';
+import NotTested from '/snippets/code-not-tested-en.mdx';
+
+<NotTested />
+  
 <NpmBawabah />
 
 ### **Create Callback Route**
@@ -57,5 +61,45 @@ export async function GET(req: NextRequest) {
 ```
 
 </CodeGroup>
+
+<DevNote />
+
+## Create Login Page
+
+```typescript
+// File: app/login/page.tsx
+"use client";
+
+import { useEffect } from "react";
+
+export default function LoginPage() {
+  useEffect(() => {
+    // Dynamically load the Bawabah script
+    const script = document.createElement("script");
+    script.src = "https://bawabah.app/app/login-form.js";
+    script.async = true;
+    script.onload = () => {
+      // @ts-ignore - injected by the script
+      if (typeof startBawabah === "function") {
+        startBawabah({
+          element: "login-form",
+          appId: "your-app-id", // 🔑 replace with your real App ID
+          callbackUrl: "http://localhost:3000/login/callback" // 🔑 replace with your callback
+        });
+      }
+    };
+    document.body.appendChild(script);
+  }, []);
+
+  return (
+    <main className="flex min-h-screen flex-col items-center justify-center">
+      <h1 className="text-2xl font-bold text-center w-full">
+        Welcome to my Website
+      </h1>
+      <div id="login-form" className="mt-6"></div>
+    </main>
+  );
+}
+```
 
 <DevNote />

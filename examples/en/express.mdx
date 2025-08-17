@@ -7,7 +7,6 @@ icon: "/icons/expressjs-icon.svg"
 import BackEnd from '/snippets/backend-en.mdx';
 import DevNote from '/snippets/dev-server-note-en.mdx';
 
-
 <BackEnd />
 
 ### Create Front-end Route
@@ -151,7 +150,7 @@ Create an HTML file with the name `login.html` to serve as the login page.
     startBawabah({
       element:"login-form",
       appId: "{your-app-id}",
-      callbackUrl: "{your-callback-url}"
+      callbackUrl: "http://localhost:3000/login/callback"
     })
   </script>
 </body>
