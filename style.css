@@ -11,8 +11,7 @@ html {
     border: 2px solid rgb(var(--primary-dark));
 }
 
-img.bg-transparent,
-.dark\:bg-gray-500:is(.dark *){
+img.bg-transparent{
   background: transparent !important;
   border:none !important;
 }
