@@ -60,6 +60,7 @@
             "icon": "plug",              
             "pages": [
               "api-reference/en/index",
+              "POST /app/session",
               "api-reference/en/errors"
             ]
           }
