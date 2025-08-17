@@ -1,7 +1,7 @@
 ---
-title: "Next.js"
-description: "Next.js Example."
-icon: "react"
+title: "Astro"
+description: "Astro Example."
+icon: "/icons/astro.svg"
 ---
 
 import DevNote from '/snippets/dev-server-note-en.mdx';
@@ -69,40 +69,44 @@ export async function GET(req: NextRequest) {
 
 <CodeGroup>
 
-```tsx app/login/page.tsx
-// File: app/login/page.tsx
-"use client";
+```html filename
+---
 
-import { useEffect } from "react";
 
-export default function LoginPage() {
-  useEffect(() => {
-    // Dynamically load the Bawabah script
-    const script = document.createElement("script");
-    script.src = "https://bawabah.app/app/login-form.js";
-    script.async = true;
-    script.onload = () => {
-      // @ts-ignore - injected by the script
-      if (typeof startBawabah === "function") {
-        startBawabah({
-          element: "login-form",
-          appId: "your-app-id", // 🔑 replace with your real App ID
-          callbackUrl: "http://localhost:3000/login/callback" // 🔑 replace with your callback
-        });
+---
+
+<html lang="ar">
+  <head>
+    <meta charset="UTF-8" />
+    <title>My Project</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100svh;
       }
-    };
-    document.body.appendChild(script);
-  }, []);
+      h1 {
+        width: 100%;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Welcome to my Website</h1>
+    <div id="login-form"></div>
 
-  return (
-    <main className="flex min-h-screen flex-col items-center justify-center">
-      <h1 className="text-2xl font-bold text-center w-full">
-        Welcome to my Website
-      </h1>
-      <div id="login-form" className="mt-6"></div>
-    </main>
-  );
-}
+    <!-- Load Bawabah login form -->
+    <script src="https://bawabah.app/app/login-form.js"></script>
+    <script>
+      startBawabah({
+        element: "login-form",
+        appId: "your-app-id", // 🔑 replace with real appId
+        callbackUrl: "http://localhost:4321/login/callback"
+      })
+    </script>
+  </body>
+</html>
 ```
 
 </CodeGroup>
