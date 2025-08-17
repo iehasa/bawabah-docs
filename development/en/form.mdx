@@ -23,19 +23,6 @@ description: "Setup Bawabah Form Login Solution."
    <head>
      <meta charset="UTF-8">
      <title>My Project</title>
-     <style>
-       body{
-         display: flex;
-         justify-content: center;
-         align-items: center;
-         min-height: 100svh;
-       }
-   
-       h1{
-         width: 100%;
-         text-align: center;
-       }
-     </style>
    </head>
    <body>
      <h1>Welcome to my Website</h1>
@@ -60,5 +47,65 @@ description: "Setup Bawabah Form Login Solution."
      </script>
    ```
 
-   > Replace `{your-app-id}` with your appId and `{your-callback-url}` with your callback URL From [Create Your First App](/getting-started/en/quickstart#create-your-first-app) Step.
-4. 
+   > Replace `{your-app-id}` with your appId and `{your-callback-url}` with your callback URL From [Create Your First App](/getting-started/en/quickstart#create-your-first-app) Step. and raplace `{plachilder-element-id}` with your placeholder element id from the HTML element configured on the previous step.
+4. Final Code:
+
+   ```html
+   <!DOCTYPE html>
+   <html lang="ar">
+   <head>
+     <meta charset="UTF-8">
+     <title>My Project</title>
+     <style>
+       body{
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         min-height: 100svh;
+       }
+   
+       h1{
+         width: 100%;
+         text-align: center;
+       }
+     </style>
+   </head>
+   <body>
+     	<h1>Welcome to my Website</h1>
+   	<div id="login-form"></div>
+   
+     <script src="https://bawabah.app/app/login-form.js"></script>
+     <script>
+       startBawabah({
+         element:"{plachilder-element-id}",
+         appId: "{your-app-id}",
+         callbackUrl: "{your-callback-url}"
+       })
+     </script>
+   </body>
+   </html>
+   ```
+
+## Form Parameters
+
+These are the parameters that can be used in `startBawabah()` function.
+
+<ResponseField name="element" type="string" required>
+  Specify the element where you want the login form to be inserted.
+</ResponseField>
+
+<ResponseField name="appId" type="string" required>
+  Your appId from [Create Your First App](/getting-started/en/quickstart#create-your-first-app) Step.
+</ResponseField>
+
+<ResponseField name="callbackUrl" type="string" required>
+  Your callback URL from [Create Your First App](/getting-started/en/quickstart#create-your-first-app) Step.
+</ResponseField>
+
+<ResponseField name="width" type="number">
+  Specify the width of the login form in pixels - Leave it empty for auto width.
+</ResponseField>
+
+<ResponseField name="height " type="number">
+  Specify the height of the login form in pixels  - Leave it empty for auto height.
+</ResponseField>
