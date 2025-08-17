@@ -14,3 +14,51 @@ description: "Setup Bawabah Form Login Solution."
 />
 
 ## Setup Form Login
+
+1. Prepare your Login Page:
+
+   ```html
+   <!DOCTYPE html>
+   <html lang="ar">
+   <head>
+     <meta charset="UTF-8">
+     <title>My Project</title>
+     <style>
+       body{
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         min-height: 100svh;
+       }
+   
+       h1{
+         width: 100%;
+         text-align: center;
+       }
+     </style>
+   </head>
+   <body>
+     <h1>Welcome to my Website</h1>
+   </body>
+   </html>
+   ```
+2. Add a Placeholder element where you want your Form to be inserted and give it a unique id:
+
+   ```html
+   <div id="login-form"></div>
+   ```
+3. Add this snippet to your HTML code:
+
+   ```html
+     <script src="https://bawabah.app/app/login-form.js"></script>
+     <script>
+       startBawabah({
+         element:"{plachilder-element-id}",
+         appId: "{your-app-id}",
+         callbackUrl: "{your-callback-url}"
+       })
+     </script>
+   ```
+
+   > Replace `{your-app-id}` with your appId and `{your-callback-url}` with your callback URL From [Create Your First App](/getting-started/en/quickstart#create-your-first-app) Step.
+4. 
