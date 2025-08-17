@@ -1,0 +1,24 @@
+First, we have to install Bawabah Library from NPM (https://www.npmjs.com/package/bawabah) using the command:
+
+```
+npm i bawabah
+```
+
+After installing the npm Package, we can start using it immediately:
+
+<CodeGroup>
+
+```typescript {file}
+// Import Bawabah Library
+import Bawabah from 'bawabah';
+
+// Initialize Bawabah with your credentials
+const bw = new Bawabah();
+bw.init({
+    appId: "your-app-id",
+    appSecret: "your-app-secret"
+});
+```
+</CodeGroup>
+
+> Replace `{your-app-id}` with your appId and `{your-app-secret}`with your appSecret From [Create Your First App](#create-your-first-app) Step.
