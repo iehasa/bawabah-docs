@@ -1,0 +1,26 @@
+---
+title: "Errors"
+description: "Bawabah API Errors"
+---
+
+import DevNote from '/snippets/dev-server-note-en.mdx';
+
+This is a Table of All Bawanah Error Codes and their details:
+
+| **Code** | **Description**              | **Details**                                                                                                                                                         |
+| :------: | :--------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+| 1        | Invalid data                 | Data structure does not match the expected schema                                                                                                                   |
+| 2        | Missing App Data             | Please complete your app setup                                                                                                                                      |
+| 3        | Too many Login attempts      | Login Quota exceeded. Please try again in a while.                                                                                                                  |
+| 4        | App is in Sandbox mode       | You cannot use this app unless you are listed as a developer or granted access as test user                                                                         |
+| 5        | Blocked by Protection system | Bawabah protection system has detected suspicious behavior                                                                                                          |
+| 400      | Invalid data                 | Invalid request content, format, or schema                                                                                                                          |
+| 401      | Authentication failed        | Invalid Credentials                                                                                                                                                 |
+| 403      | Insufficient permissions     | You don't have the proper permission to perform this action                                                                                                         |
+| 404      | Data not found               | Requested resource doesn't exist                                                                                                                                    |
+| 409      | Duplicate Data               | Requested resource exists already                                                                                                                                   |
+| 410      | Expired                      | The requested resource has expired or is no longer valid                                                                                                            |
+| 429      | Rate Limit Reached           | Quota exceeded for this operation                                                                                                                                   |
+| 500      | Server Error                 | The server is not available at the moment or is unable to handle the request. Please contact Bawabah Dev team at: [contact@bawabah.app](mailto:contact@bawabah.app) |
+
+<DevNote />
