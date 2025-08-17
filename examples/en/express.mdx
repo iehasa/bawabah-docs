@@ -9,3 +9,149 @@ import BackEnd from '/snippets/backend-en.mdx';
 <BackEnd />
 
 ### Create Front-end Route
+
+Create the `/login` route to serve the Login Page:
+
+<CodeGroup>
+
+```typescript index.ts
+// Import Express and Bawabah Library
+import express from 'express';
+import Bawabah from 'bawabah';
+
+// Initialize Bawabah Library with your credentials
+const bw = new Bawabah();
+bw.init({
+    appId: "0bt2rmju",
+    appSecret: "cAXWroW6DBxJd2mTLp6ew0LCt57gsdOQUtMmKcHNTFY"
+});
+
+
+// Create Express app
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+// Serve the login page at /login
+app.get('/login', (req, res) => {
+  res.sendFile(__dirname + '/public/login.html');
+});
+
+// Callback route for Bawabah redirect
+app.get('/login/callback', async (req, res) => {
+    const sessionId = req.query.sessionId as string; // Get Session Id from Query /login/callback?sessionId=abc123
+    if (!sessionId) {
+        // If sessionId is missing, return a 400 error
+        return res.status(400).send('Missing sessionId in query');
+    }
+
+    try {
+        // Capture user session from Bawabah
+        const result = await bw.capture(sessionId);
+
+        // --- Perform Your User Login/Signup Logic here ---
+
+        res.status(200).json({ loggedIn: true });
+    } catch (err) {
+        // If Bawabah API Respond with an Error, return a 500 error to the user with details
+        res.status(500).json({ error: 'Failed to capture session', details: err });
+    }
+
+});
+
+// Start the Express server
+app.listen(PORT, () => {
+    console.log(`Server running on http://localhost:${PORT}`);
+});
+```
+
+
+```javascript index.js
+// Import Express and Bawabah Library
+const express = require('express');
+const Bawabah = require('bawabah');
+
+// Initialize Bawabah Librarywith your credentials
+const bw = new Bawabah();
+bw.init({
+    appId: "0bt2rmju",
+    appSecret: "cAXWroW6DBxJd2mTLp6ew0LCt57gsdOQUtMmKcHNTFY"
+});
+
+
+// Create Express app
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+// Serve the login page at /login
+app.get('/login', (req, res) => {
+  res.sendFile(__dirname + '/public/login.html');
+});
+
+// Callback route for Bawabah redirect
+app.get('/login/callback', async (req, res) => {
+    const sessionId = req.query.sessionId; // Get Session Id from Query /login/callback?sessionId=abc123
+    if (!sessionId) {
+        // If sessionId is missing, return a 400 error
+        return res.status(400).send('Missing sessionId in query');
+    }
+
+    try {
+        // Capture user session from Bawabah
+        const result = await bw.capture(sessionId);
+
+        // --- Perform Your User Login/Signup Logic here ---
+
+        res.status(200).json({ loggedIn: true });
+    } catch (err) {
+        // If Bawabah API responds with an error, return a 500 error to the user with details
+        res.status(500).json({ error: 'Failed to capture session', details: err.message || err });
+    }
+});
+
+// Start the Express server
+app.listen(PORT, () => {
+    console.log(`Server running on http://localhost:${PORT}`);
+});
+```
+
+</CodeGroup>
+
+### Create Login Page
+
+Create an HTML file with the name `login.html` to serve as the login page.
+
+```html
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>My Project</title>
+  <style>
+    body{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100svh;
+    }
+
+    h1{
+      width: 100%;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  	<h1>Welcome to my Website</h1>
+	<div id="login-form"></div>
+
+  <script src="https://bawabah.app/app/login-form.js"></script>
+  <script>
+    startBawabah({
+      element:"login-form",
+      appId: "{your-app-id}",
+      callbackUrl: "{your-callback-url}"
+    })
+  </script>
+</body>
+</html>
+```
