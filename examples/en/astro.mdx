@@ -16,49 +16,45 @@ import NpmBawabah from '/snippets/npm-en.mdx';
 
 Now we will create the callback route to capture the user session. In this example, we will use Next.js to create the route, then capture the user session with the `capture()` function:
 
-But before that, we need to install Express.js using this command:
-
-```
-npm i next react react-dom
-```
-
 <CodeGroup>
 
-```typescript app/login/callback/route.ts
-// File: app/login/callback/route.ts
-import { NextRequest } from 'next/server';
-import Bawabah from 'bawabah';
+```typescript src/pages/login/callback.ts
+import type { APIRoute } from "astro";
+import Bawabah from "bawabah";
 
-// Initialize Bawabah with your credentials
+// Initialize Bawabah
 const bw = new Bawabah();
 bw.init({
   appId: "your-app-id",
-  appSecret: "your-app-secret"
+  appSecret: "your-app-secret",
 });
 
-// Callback route for Bawabah redirect
-export async function GET(req: NextRequest) {
-  const { searchParams } = new URL(req.url);
-  const sessionId = searchParams.get("sessionId"); // /login/callback?sessionId=abc123
+export const GET: APIRoute = async ({ url }) => {
+  const sessionId = url.searchParams.get("sessionId");
 
   if (!sessionId) {
     return new Response("Missing sessionId in query", { status: 400 });
   }
 
   try {
-    // Capture user session from Bawabah
     const result = await bw.capture(sessionId);
 
-    // --- Perform Your User Login/Signup Logic here ---
+    // --- Perform your login/signup logic here ---
 
-    return Response.json({ loggedIn: true, session: result }, { status: 200 });
-  } catch (err) {
-    return Response.json(
-      { error: "Failed to capture session", details: String(err) },
-      { status: 500 }
+    return new Response(
+      JSON.stringify({ loggedIn: true, session: result }),
+      { status: 200, headers: { "Content-Type": "application/json" } }
+    );
+  } catch (err: any) {
+    return new Response(
+      JSON.stringify({
+        error: "Failed to capture session",
+        details: err.message || String(err),
+      }),
+      { status: 500, headers: { "Content-Type": "application/json" } }
     );
   }
-}
+};
 ```
 
 </CodeGroup>
