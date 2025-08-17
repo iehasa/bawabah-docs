@@ -10,3 +10,7 @@ html {
 .mdx-content img:not(.diagram){
     border: 2px solid rgb(var(--primary-dark));
 }
+
+.dark\:bg-gray-500:is(.dark *){
+  background: transparent;
+}
