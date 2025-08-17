@@ -11,7 +11,7 @@ html {
     border: 2px solid rgb(var(--primary-dark));
 }
 
-img.bg-transparent{
+.card img.bg-transparent{
   background: transparent !important;
   border:none !important;
 }
