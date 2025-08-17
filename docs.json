@@ -48,7 +48,7 @@
               "examples/en/next",
               "examples/en/vue",
               "examples/en/astro",
-              "examples/en/cloudflare-workers"
+              "examples/en/cloudflare"
             ]
           },
           {
@@ -107,7 +107,7 @@
               "examples/en/next",
               "examples/en/vue",
               "examples/en/astro",
-              "examples/en/cloudflare-workers"
+              "examples/en/cloudflare"
               ]
             },
             {
