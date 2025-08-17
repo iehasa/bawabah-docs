@@ -120,7 +120,9 @@ app.listen(PORT, () => {
 
 Create the Login Page Component at `src/views/Login.vue`:
 
-```html
+<CodeGroup>
+
+```html src/views/Login.vue
 <template>
   <main class="login-page">
     <h1>Welcome to my Website</h1>
@@ -164,11 +166,13 @@ h1 {
 </style>
 ```
 
-<DevNote />
+</CodeGroup>
 
 Create the Login Page Route in `src/router/index.js`:
 
-```typescript
+<CodeGroup>
+
+```javascript src/router/index.js
 import { createRouter, createWebHistory } from "vue-router";
 import Login from "../views/Login.vue";
 
@@ -184,12 +188,20 @@ const router = createRouter({
 export default router;
 ```
 
+</CodeGroup>
+
 Mount the router in main.js file at `src/main.js`:
 
-```typescript
+<CodeGroup>
+
+```javascript src/main.js
 import { createApp } from "vue";
 import App from "./App.vue";
 import router from "./router";
 
 createApp(App).use(router).mount("#app");
 ```
+
+</CodeGroup>
+
+<DevNote />
