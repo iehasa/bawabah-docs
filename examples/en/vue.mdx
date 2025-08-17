@@ -8,58 +8,108 @@ import DevNote from '/snippets/dev-server-note-en.mdx';
 import NotTested from '/snippets/code-not-tested-en.mdx';
 import NpmBawabah from '/snippets/npm-en.mdx';
 
-
 <NotTested />
 
 <NpmBawabah />
 
-### **Create Callback Route**
+### **Create Callback Route using Express.js**
 
-Now we will create the callback route to capture the user session. In this example, we will use Next.js to create the route, then capture the user session with the `capture()` function:
+Now we will create the callback route to capture the user session. In this example, we will use Express.js to create the route, then capture the user session with the `capture()` function:
 
 But before that, we need to install Express.js using this command:
 
 ```
-npm i next react react-dom
+npm i express
 ```
 
 <CodeGroup>
 
-```typescript app/login/callback/route.ts
-// File: app/login/callback/route.ts
-import { NextRequest } from 'next/server';
+```typescript index.ts
+// Import Express and Bawabah Library
+import express from 'express';
 import Bawabah from 'bawabah';
 
 // Initialize Bawabah with your credentials
 const bw = new Bawabah();
 bw.init({
-  appId: "your-app-id",
-  appSecret: "your-app-secret"
+    appId: "your-app-id",
+    appSecret: "your-app-secret"
 });
 
+// Create Express app
+const app = express();
+const PORT = process.env.PORT || 3000;
+
 // Callback route for Bawabah redirect
-export async function GET(req: NextRequest) {
-  const { searchParams } = new URL(req.url);
-  const sessionId = searchParams.get("sessionId"); // /login/callback?sessionId=abc123
+app.get('/login/callback', async (req, res) => {
+    const sessionId = req.query.sessionId as string; // Get Session Id from Query /login/callback?sessionId=abc123
+    if (!sessionId) {
+        // If sessionId is missing, return a 400 error
+        return res.status(400).send('Missing sessionId in query');
+    }
 
-  if (!sessionId) {
-    return new Response("Missing sessionId in query", { status: 400 });
-  }
+    try {
+        // Capture user session from Bawabah
+        const result = await bw.capture(sessionId);
 
-  try {
-    // Capture user session from Bawabah
-    const result = await bw.capture(sessionId);
+        // --- Perform Your User Login/Signup Logic here ---
 
-    // --- Perform Your User Login/Signup Logic here ---
+        res.status(200).json({ loggedIn: true });
+    } catch (err) {
+        // If Bawabah API Respond with an Error, return a 500 error to the user with details
+        res.status(500).json({ error: 'Failed to capture session', details: err });
+    }
 
-    return Response.json({ loggedIn: true, session: result }, { status: 200 });
-  } catch (err) {
-    return Response.json(
-      { error: "Failed to capture session", details: String(err) },
-      { status: 500 }
-    );
-  }
-}
+});
+
+// Start the Express server
+app.listen(PORT, () => {
+    console.log(`Server running on http://localhost:${PORT}`);
+});
+```
+
+
+```javascript index.js
+// Import Express and Bawabah Library
+const express = require('express');
+const Bawabah = require('bawabah');
+
+// Initialize Bawabah with your credentials
+const bw = new Bawabah();
+bw.init({
+    appId: "your-app-id",
+    appSecret: "your-app-secret"
+});
+
+// Create Express app
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+// Callback route for Bawabah redirect
+app.get('/login/callback', async (req, res) => {
+    const sessionId = req.query.sessionId; // Get Session Id from Query /login/callback?sessionId=abc123
+    if (!sessionId) {
+        // If sessionId is missing, return a 400 error
+        return res.status(400).send('Missing sessionId in query');
+    }
+
+    try {
+        // Capture user session from Bawabah
+        const result = await bw.capture(sessionId);
+
+        // --- Perform Your User Login/Signup Logic here ---
+
+        res.status(200).json({ loggedIn: true });
+    } catch (err) {
+        // If Bawabah API responds with an error, return a 500 error to the user with details
+        res.status(500).json({ error: 'Failed to capture session', details: err.message || err });
+    }
+});
+
+// Start the Express server
+app.listen(PORT, () => {
+    console.log(`Server running on http://localhost:${PORT}`);
+});
 ```
 
 </CodeGroup>
