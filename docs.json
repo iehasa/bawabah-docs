@@ -59,7 +59,6 @@
             },
             "icon": "plug",              
             "pages": [
-              "api-reference/en/index",
               "POST /app/session",
               "api-reference/en/errors"
             ]
@@ -117,7 +116,7 @@
               "group": "مراجع الواجهة البرمجية",
               "icon": "plug",              
               "pages": [
-              "api-reference/capture-session",
+              "POST /app/session",
               "api-reference/en/errors"
               ]
             }
@@ -136,6 +135,12 @@
       }
     ]
   },
+  "redirects": [
+    {
+      "source": "/api-reference/en",
+      "destination": "/api-reference/capture-session"
+    }
+  ],
   "logo": {
     "light": "/logo/light.svg",
     "dark": "/logo/dark.svg"
