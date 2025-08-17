@@ -1,0 +1,110 @@
+---
+title: "Cloudflare"
+description: "Cloudflare Example."
+icon: "cloudflare"
+---
+
+import DevNote from '/snippets/dev-server-note-en.mdx';
+import NotTested from '/snippets/code-not-tested-en.mdx';
+import NpmBawabah from '/snippets/npm-en.mdx';
+
+<NotTested />
+
+<NpmBawabah />
+
+### **Create Callback Route**
+
+Now we will create the callback route to capture the user session. In this example, we will use Next.js to create the route, then capture the user session with the `capture()` function:
+
+But before that, we need to install the necessary packages using this command:
+
+```
+npm i next react react-dom
+```
+
+<CodeGroup>
+
+```typescript app/login/callback/route.ts
+// File: app/login/callback/route.ts
+import { NextRequest } from 'next/server';
+import Bawabah from 'bawabah';
+
+// Initialize Bawabah with your credentials
+const bw = new Bawabah();
+bw.init({
+  appId: "your-app-id",
+  appSecret: "your-app-secret"
+});
+
+// Callback route for Bawabah redirect
+export async function GET(req: NextRequest) {
+  const { searchParams } = new URL(req.url);
+  const sessionId = searchParams.get("sessionId"); // /login/callback?sessionId=abc123
+
+  if (!sessionId) {
+    return new Response("Missing sessionId in query", { status: 400 });
+  }
+
+  try {
+    // Capture user session from Bawabah
+    const result = await bw.capture(sessionId);
+
+    // --- Perform Your User Login/Signup Logic here ---
+
+    return Response.json({ loggedIn: true, session: result }, { status: 200 });
+  } catch (err) {
+    return Response.json(
+      { error: "Failed to capture session", details: String(err) },
+      { status: 500 }
+    );
+  }
+}
+```
+
+</CodeGroup>
+
+<DevNote />
+
+## Create Login Page
+
+<CodeGroup>
+
+```tsx app/login/page.tsx
+// File: app/login/page.tsx
+"use client";
+
+import { useEffect } from "react";
+
+export default function LoginPage() {
+  useEffect(() => {
+    // Dynamically load the Bawabah script
+    const script = document.createElement("script");
+    script.src = "https://bawabah.app/app/login-form.js";
+    script.async = true;
+    script.onload = () => {
+      // @ts-ignore - injected by the script
+      if (typeof startBawabah === "function") {
+        startBawabah({
+          element: "login-form",
+          appId: "your-app-id", // 🔑 replace with your real App ID
+          callbackUrl: "http://localhost:3000/login/callback" // 🔑 replace with your callback
+        });
+      }
+    };
+    document.body.appendChild(script);
+  }, []);
+
+  return (
+    <main className="flex min-h-screen flex-col items-center justify-center">
+      <h1 className="text-2xl font-bold text-center w-full">
+        Welcome to my Website
+      </h1>
+      <div id="login-form" className="mt-6"></div>
+    </main>
+  );
+}
+```
+
+</CodeGroup>
+
+<DevNote />

@@ -14,7 +14,7 @@ import NpmBawabah from '/snippets/npm-en.mdx';
 
 ### **Create Callback Route**
 
-Now we will create the callback route to capture the user session. In this example, we will use Next.js to create the route, then capture the user session with the `capture()` function:
+Now we will create the callback route to capture the user session. In this example, we will use Astro to create the route, then capture the user session with the `capture()` function:
 
 <CodeGroup>
 
@@ -63,9 +63,11 @@ export const GET: APIRoute = async ({ url }) => {
 
 ## Create Login Page
 
+Create the Login Page at `src/pages/login.astro`:
+
 <CodeGroup>
 
-```html filename
+```html src/pages/login.astro
 ---
 
 
@@ -106,41 +108,5 @@ export const GET: APIRoute = async ({ url }) => {
 ```
 
 </CodeGroup>
-
-```typescript
-// File: app/login/page.tsx
-"use client";
-
-import { useEffect } from "react";
-
-export default function LoginPage() {
-  useEffect(() => {
-    // Dynamically load the Bawabah script
-    const script = document.createElement("script");
-    script.src = "https://bawabah.app/app/login-form.js";
-    script.async = true;
-    script.onload = () => {
-      // @ts-ignore - injected by the script
-      if (typeof startBawabah === "function") {
-        startBawabah({
-          element: "login-form",
-          appId: "your-app-id", // 🔑 replace with your real App ID
-          callbackUrl: "http://localhost:3000/login/callback" // 🔑 replace with your callback
-        });
-      }
-    };
-    document.body.appendChild(script);
-  }, []);
-
-  return (
-    <main className="flex min-h-screen flex-col items-center justify-center">
-      <h1 className="text-2xl font-bold text-center w-full">
-        Welcome to my Website
-      </h1>
-      <div id="login-form" className="mt-6"></div>
-    </main>
-  );
-}
-```
 
 <DevNote />
