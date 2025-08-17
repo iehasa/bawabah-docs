@@ -7,6 +7,6 @@ html {
   scroll-behavior: smooth;
 }
 
-.mdx-content img{
+.mdx-content img:not(.diagram){
     border: 2px solid rgb(var(--primary-dark));
 }
