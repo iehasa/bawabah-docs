@@ -172,5 +172,8 @@
     "socials": {
       "discord": "https://discord.gg/9YpqwdNpxy"
     }
+  },
+  "seo": {
+    "indexing": "navigable"
   }
 }
